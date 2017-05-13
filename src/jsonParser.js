@@ -45,3 +45,5 @@ const htmlElement = (type, content, attributes = []) => {
 
     return `<${type}${htmlAttributes}>${content}</${type}>`;
 };
+
+export default jsonParser;

@@ -1,5 +1,3 @@
-const isTextNode = x => x.nodeType === Node.TEXT_NODE;
-
 const getNodeValue = x => x !== null ? x.trim() : '';
 
 const getTextOfTextNodes = nodes => {
@@ -39,3 +37,5 @@ const htmlParser = nodes => {
         };
     });
 };
+
+export default htmlParser;

@@ -1,3 +1,6 @@
+import htmlParser from './htmlParser';
+import jsonParser from './jsonParser';
+
 const EDITOR_PANELS = {
     JSON_PANEL: document.querySelector('.editor__input--json'),
     HTML_PANEL: document.querySelector('.editor__input--html'),
@@ -30,16 +33,13 @@ EDITOR_PANELS.HTML_PANEL.oninput = () => {
     setJsonPanelContent(htmlParser(EDITOR_PANELS.PREVIEW_PANEL.children))
 };
 
-document.querySelector('.editor__actions--sample').onclick = e => {
-    let json = [
-        {
-            type: 'div', value: 'Hello World', attributes: {hello: 'world', src: 'test'}, children: [
+document.querySelector('.editor__actions--sample').onclick = loadExampleData;
+
+const loadExampleData = () => {
+    const json = [
+        {type: 'div', value: 'Hello World', attributes: {hello: 'world', src: 'test'}, children: [
             {type: 'h1', value: 'test'},
-            {
-                type: 'p', value: 'hello world',
-                children: [{type: 'h1', value: 'hello'}]
-            }
-        ]
+            {type: 'p', value: 'hello world', children: [{type: 'h1', value: 'hello'}]}]
         }
     ];
 
@@ -56,9 +56,6 @@ const getHtmlPanelContent = () => {
     return EDITOR_PANELS.HTML_PANEL.value;
 };
 
-const getPreviewPanelContent = ()  => {
-    return EDITOR_PANELS.PREVIEW_PANEL.children;
-};
 
 const getJsonPanelContent = () => {
     return JSON.parse(EDITOR_PANELS.JSON_PANEL.value);
