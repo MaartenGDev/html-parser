@@ -43,22 +43,21 @@ console.log(html);
 
 ## Convert HTML to JSON
 ```html
-<body class="app">
+<main class="app">
+    <h1>My Parser</h1>
+    <p>It works!</p>
 
-<h1>My Parser</h1>
-<p>It works!</p>
-
-<footer>
-    my footer text
-    <h3>The footer</h3>
-    <p>Copyright!</p>
-</footer>
-</body>
+    <footer>
+        my footer text
+        <h3>The footer</h3>
+        <p>Copyright!</p>
+    </footer>
+</main>
 ```
 ```js
 const root = document.querySelector('.app');
 
-console.log(htmlParser(root.children));
+console.log(JSON.stringify(htmlParser(root.children), null, 2));
 ```
 
 ## Result
@@ -90,13 +89,6 @@ console.log(htmlParser(root.children));
         "attributes": {}
       }
     ]
-  },
-  {
-    "type": "script",
-    "value": "",
-    "attributes": {
-      "src": "htmlParser.js"
-    }
   }
 ]
 ```
