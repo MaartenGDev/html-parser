@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.editor {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.editor__window {
+    display: inline-block;
+    width: calc(50% - 45px);
+    height: 100%;
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.editor__window--right{
+    float: right;
+}
