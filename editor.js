@@ -1,5 +1,9 @@
-const jsonField = document.querySelector('.editor__window--json');
-const htmlField = document.querySelector('.editor__window--html');
+const EDITOR_PANELS = {
+    JSON_PANEL: document.querySelector('.editor__input--json'),
+    HTML_PANEL: document.querySelector('.editor__input--html'),
+    PREVIEW_PANEL: document.querySelector('.editor__content--preview')
+};
+
 
 document.onkeydown = e => {
     const {target} = e;
@@ -16,33 +20,58 @@ document.onkeydown = e => {
 
 };
 
-jsonField.oninput = () => {
-    setHtmlFieldContent(jsonParser(getJsonFieldContent()));
+EDITOR_PANELS.JSON_PANEL.oninput = () => {
+    setHtmlPanelContent(jsonParser(getJsonPanelContent()));
+    setPreviewPanelContent(getHtmlPanelContent());
+};
+
+EDITOR_PANELS.HTML_PANEL.oninput = () => {
+    setPreviewPanelContent(getHtmlPanelContent());
+    setJsonPanelContent(htmlParser(EDITOR_PANELS.PREVIEW_PANEL.children))
 };
 
 document.querySelector('.editor__actions--sample').onclick = e => {
     let json = [
-        {type: 'div', value: 'Hello World', attributes: { hello: 'world', src: 'test' }, children: [
-            { type: 'h1', value: 'test'},
-            { type: 'p', value: 'hello world',
-                children: [{ type: 'h1',value: 'hello' }]}
-            ]
+        {
+            type: 'div', value: 'Hello World', attributes: {hello: 'world', src: 'test'}, children: [
+            {type: 'h1', value: 'test'},
+            {
+                type: 'p', value: 'hello world',
+                children: [{type: 'h1', value: 'hello'}]
+            }
+        ]
         }
     ];
 
 
-    setJsonFieldContent(json);
-    setHtmlFieldContent(jsonParser(json));
+    setJsonPanelContent(json);
+
+    const html = jsonParser(json);
+
+    setHtmlPanelContent(html);
+    setPreviewPanelContent(html);
 };
 
-const getJsonFieldContent = () => {
-    return JSON.parse(jsonField.value);
+const getHtmlPanelContent = () => {
+    return EDITOR_PANELS.HTML_PANEL.value;
 };
 
-const setJsonFieldContent = json => {
-    jsonField.value = JSON.stringify(json, null, 2);
+const getPreviewPanelContent = ()  => {
+    return EDITOR_PANELS.PREVIEW_PANEL.children;
 };
 
-const setHtmlFieldContent = content => {
-    htmlField.innerHTML = content;
+const getJsonPanelContent = () => {
+    return JSON.parse(EDITOR_PANELS.JSON_PANEL.value);
+};
+
+const setJsonPanelContent = json => {
+    EDITOR_PANELS.JSON_PANEL.value = JSON.stringify(json, null, 2);
+};
+
+const setHtmlPanelContent = content => {
+    EDITOR_PANELS.HTML_PANEL.value = content;
+};
+
+const setPreviewPanelContent = content => {
+    EDITOR_PANELS.PREVIEW_PANEL.innerHTML = content;
 };

@@ -26,7 +26,6 @@ let json = [
 const jsonParser = (elements) => {
     return elements.map(e => {
         const isContainer = e.hasOwnProperty('children');
-
         const {type, value = '', attributes = {}} = e;
 
         if (isContainer) {

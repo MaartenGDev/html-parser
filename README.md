@@ -34,7 +34,7 @@ const json = `
 const html = jsonParser(json)
 console.log(html);
 ```
-## Result
+### Result
 ```html
 <div><h1 data-translation-id="46">test</h1>
     <section>section text<h1>hello</h1></section>
@@ -57,10 +57,10 @@ console.log(html);
 ```js
 const root = document.querySelector('.app');
 
-console.log(JSON.stringify(htmlParser(root.children), null, 2));
+console.log(JSON.stringify(htmlParser(root.children)));
 ```
 
-## Result
+### Result
 ```json
 [
   {

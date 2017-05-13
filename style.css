@@ -1,23 +1,63 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Open Sans', sans-serif;
 }
-
 .editor {
     width: calc(100% - 20px);
     margin: 0 auto;
     height: 100vh;
 }
-
+.editor__actions{
+    padding: 20px 0;
+}
 .editor__window {
     display: inline-block;
-    width: calc(50% - 45px);
+    width: calc((100% / 3) - 3px);
     height: 100%;
     margin: 0;
-    padding: 20px;
-    font-size: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);;
 }
 
-.editor__window--right{
+.editor__window--right {
     float: right;
+}
+
+.editor__window--preview {
+    float: right;
+}
+
+.editor__input {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: 18px;
+    border: none;
+}
+
+.editor__content {
+    height: 100%;
+    width: calc(100% - 40px);
+    padding: 20px;
+}
+
+.panel {
+    background-color: #34495e;
+    padding: 10px;
+}
+
+.panel__title {
+    color: white;
+    margin: 0;
+    padding: 5px;
+}
+
+.btn{
+    font-size: 13px;
+    border: none;
+    padding: 8px 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    color: white;
+    background-color: #3498db;
 }
