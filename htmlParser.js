@@ -14,7 +14,7 @@ const getAttributes = node => {
     }, {});
 };
 
-const parser = nodes => {
+const htmlParser = nodes => {
     return [...nodes].map(node => {
         const isContainer = node.children.length > 0 && !isTextNode(node.children[0]);
 
@@ -35,4 +35,4 @@ const parser = nodes => {
     });
 };
 
-console.log(JSON.stringify(parser(root.children), null, 2));
+console.log(JSON.stringify(htmlParser(root.children), null, 2));

@@ -44,5 +44,6 @@ const setJsonFieldContent = json => {
 };
 
 const setHtmlFieldContent = content => {
+    console.log(content);
     htmlField.innerHTML = content;
 };
