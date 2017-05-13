@@ -49,6 +49,7 @@ console.log(html);
 <p>It works!</p>
 
 <footer>
+    my footer text
     <h3>The footer</h3>
     <p>Copyright!</p>
 </footer>
@@ -65,27 +66,27 @@ console.log(htmlParser(root.children));
 [
   {
     "type": "h1",
-    "value": "",
+    "value": "My Parser",
     "attributes": {}
   },
   {
     "type": "p",
-    "value": "",
+    "value": "It works!",
     "attributes": {}
   },
   {
     "type": "footer",
-    "value": "",
+    "value": "my footer text",
     "attributes": {},
     "children": [
       {
         "type": "h3",
-        "value": "",
+        "value": "The footer",
         "attributes": {}
       },
       {
         "type": "p",
-        "value": "",
+        "value": "Copyright!",
         "attributes": {}
       }
     ]
@@ -100,3 +101,68 @@ console.log(htmlParser(root.children));
 ]
 ```
 
+# Getting started
+
+## HTML to json 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body class="app">
+
+<h1>My Parser</h1>
+<p>It works!</p>
+
+<footer>
+    my footer text
+    <h3>The footer</h3>
+    <p>Copyright!</p>
+</footer>
+<script src="htmlParser.js"></script>
+<script>
+    const root = document.querySelector('.app');
+
+    console.log(JSON.stringify(htmlParser(root.children), null, 2));
+</script>
+</body>
+</html>
+```
+
+## JSON to HTML
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<main class="app"></main>
+
+<script src="jsonParser.js"></script>
+<script>
+    const data = [
+        {
+            type: "section",
+            children: [
+                {
+                    type: "h1",
+                    value: "My Title"
+                },
+                {
+                    type: "p",
+                    value: "my description"
+                }
+            ]
+        }
+    ];
+
+    const html = jsonParser(data);
+
+    document.querySelector('.app').innerHTML = html;
+</script>
+
+</body>
+</html>
+```

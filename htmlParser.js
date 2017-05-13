@@ -1,8 +1,13 @@
-const root = document.querySelector('.app');
-
 const isTextNode = x => x.nodeType === Node.TEXT_NODE;
 
 const getNodeValue = x => x !== null ? x.trim() : '';
+
+const getTextOfTextNodes = nodes => {
+    return nodes
+        .filter(x => x.nodeType === Node.TEXT_NODE)
+        .map(x => x.data.trim())
+        .join('');
+};
 
 const getAttributes = node => {
     return Object.keys(node.attributes).reduce((attributes, currentAttributeKey) => {
@@ -16,23 +21,21 @@ const getAttributes = node => {
 
 const htmlParser = nodes => {
     return [...nodes].map(node => {
-        const isContainer = node.children.length > 0 && !isTextNode(node.children[0]);
+        const isContainer = node.children.length;
 
         if (isContainer) {
             return {
                 type: node.localName,
-                value: getNodeValue(node.nodeValue),
+                value: getTextOfTextNodes([...node.childNodes]),
                 attributes: getAttributes(node),
-                children: parser(node.children)
+                children: htmlParser(node.children)
             };
         }
 
         return {
             type: node.localName,
-            value: getNodeValue(node.children.length ? node.children[0].data : ''),
+            value: getNodeValue(node.innerHTML),
             attributes: getAttributes(node)
         };
     });
 };
-
-console.log(JSON.stringify(htmlParser(root.children), null, 2));
