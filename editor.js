@@ -1,3 +1,6 @@
+const jsonField = document.querySelector('.editor__window--json');
+const htmlField = document.querySelector('.editor__window--html');
+
 document.onkeydown = e => {
     const {target} = e;
 
@@ -13,7 +16,7 @@ document.onkeydown = e => {
 
 };
 
-document.querySelector('.editor__window--json').oninput = e => {
+jsonField.oninput = () => {
     setHtmlFieldContent(jsonParser(getJsonFieldContent()));
 };
 
@@ -33,13 +36,13 @@ document.querySelector('.editor__actions--sample').onclick = e => {
 };
 
 const getJsonFieldContent = () => {
-    return JSON.parse(document.querySelector('.editor__window--json').value);
+    return JSON.parse(jsonField.value);
 };
 
 const setJsonFieldContent = json => {
-    document.querySelector('.editor__window--json').value = JSON.stringify(json, null, 2);
+    jsonField.value = JSON.stringify(json, null, 2);
 };
 
 const setHtmlFieldContent = content => {
-    document.querySelector('.editor__window--html').innerHTML = content;
+    htmlField.innerHTML = content;
 };
