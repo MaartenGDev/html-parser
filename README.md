@@ -4,6 +4,8 @@ A tool to convert `html` to `JSON` and `JSON` to `html`.
 ## Convert JSON to html
 
 ```js
+import jsonParser from './jsonParser';
+
 const json = `
 [
   {
@@ -55,6 +57,8 @@ console.log(html);
 </main>
 ```
 ```js
+import htmlParser from './htmlParser';
+
 const root = document.querySelector('.app');
 
 console.log(JSON.stringify(htmlParser(root.children)));

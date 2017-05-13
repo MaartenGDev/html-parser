@@ -1,6 +1,8 @@
 import htmlParser from './htmlParser';
 import jsonParser from './jsonParser';
 
+const loadSampleButton = document.querySelector('.editor__actions--sample');
+
 const EDITOR_PANELS = {
     JSON_PANEL: document.querySelector('.editor__input--json'),
     HTML_PANEL: document.querySelector('.editor__input--html'),
@@ -33,8 +35,6 @@ EDITOR_PANELS.HTML_PANEL.oninput = () => {
     setJsonPanelContent(htmlParser(EDITOR_PANELS.PREVIEW_PANEL.children))
 };
 
-document.querySelector('.editor__actions--sample').onclick = loadExampleData;
-
 const loadExampleData = () => {
     const json = [
         {type: 'div', value: 'Hello World', attributes: {hello: 'world', src: 'test'}, children: [
@@ -51,6 +51,9 @@ const loadExampleData = () => {
     setHtmlPanelContent(html);
     setPreviewPanelContent(html);
 };
+
+loadSampleButton.onclick = loadExampleData;
+
 
 const getHtmlPanelContent = () => {
     return EDITOR_PANELS.HTML_PANEL.value;
