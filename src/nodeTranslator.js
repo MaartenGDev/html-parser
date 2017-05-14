@@ -1,30 +1,58 @@
-const translations = [];
+let translations = {};
 
-const getTranslation = value => {
-    const translationIndex = translations.findIndex(x => x === value);
-    const hasTranslation = translationIndex !== -1;
+const getTranslationId = (value, language) => {
+    if(!translations.hasOwnProperty(language)){
+        translations[language] = {};
+    }
+    const translationIndex = Object.keys(translations[language]).find(x => translations[language][x] === value);
+
+    const hasTranslation = translationIndex !== undefined;
+    const nextKey = Object.keys(translations[language]).length;
 
     if(hasTranslation){
         return translationIndex;
     }
 
-    return translations.push(value) - 1;
+
+    translations[language][nextKey] = value;
+
+    return nextKey;
 };
 
-const nodeTranslator = (elements) => {
+const replaceNodeValueWithTranslation = (elements, language) => {
     return elements.map(e => {
         const isContainer = e.hasOwnProperty('children');
 
-        e.value = getTranslation(e.value);
+        e.value = getTranslationId(e.value, language);
 
-        if (isContainer) {
-            const children = nodeTranslator(e.children);
-
-            return e;
+        if(isContainer){
+            e.children = replaceNodeValueWithTranslation(e.children, language);
         }
+
         return e;
     });
 };
 
+export const nodeTranslator = (elements, language) => {
+    elements = replaceNodeValueWithTranslation(elements, language);
 
-export default nodeTranslator;
+    return {
+        elements,
+        translations
+    };
+};
+
+export const translationParser = (elements, translations, language) => {
+    return elements.map(e => {
+        const isContainer = e.hasOwnProperty('children');
+
+        e.value = translations[language][e.value];
+
+        if(isContainer){
+            e.children = translationParser(e.children, translations, language);
+        }
+
+        return e;
+    });
+};
+
