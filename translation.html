@@ -8,34 +8,39 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
-    <section class="editor">
-        <section class="editor__actions">
-            <button class="btn editor__actions--sample">Load Sample data</button>
-            <button class="btn editor__actions--translate">Translate</button>
-        </section>
+<section class="editor">
+    <section class="editor__actions">
+        <button class="btn editor__actions--sample">Load Sample data</button>
+        <button class="btn editor__actions--translate">Translate</button>
 
-        <section class="editor__window editor__window--json">
-            <section class="panel">
-                <p class="panel__title">JSON</p>
-            </section>
-            <textarea class="editor__input editor__input--json"></textarea>
-        </section>
-
-        <section class="editor__window editor__window--html">
-            <section class="panel">
-                <p class="panel__title">TRANSLATIONS</p>
-            </section>
-            <textarea class="editor__input editor__input--translations"></textarea>
-        </section>
-
-        <section class="editor__window editor__window--preview">
-            <section class="panel">
-                <p class="panel__title">PREVIEW</p>
-            </section>
-            <textarea class="editor__input editor__input--preview"></textarea>
+        <section class="editor__actions--right">
+            <input class="form__input form__input--language" type="text" name="language" value="en"/>
+            <button class="btn editor__actions--set-language">Set Language</button>
         </section>
     </section>
 
-    <script src="public/js/translation.js"></script>
+    <section class="editor__window editor__window--json">
+        <section class="panel">
+            <p class="panel__title">JSON</p>
+        </section>
+        <textarea class="editor__input editor__input--json"></textarea>
+    </section>
+
+    <section class="editor__window editor__window--html">
+        <section class="panel">
+            <p class="panel__title">TRANSLATIONS</p>
+        </section>
+        <textarea class="editor__input editor__input--translations"></textarea>
+    </section>
+
+    <section class="editor__window editor__window--preview">
+        <section class="panel">
+            <p class="panel__title">PREVIEW</p>
+        </section>
+        <textarea class="editor__input editor__input--preview"></textarea>
+    </section>
+</section>
+
+<script src="public/js/translation.js"></script>
 </body>
 </html>

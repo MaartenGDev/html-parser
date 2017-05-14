@@ -2,8 +2,8 @@ import { nodeTranslator, translationParser } from '../nodeTranslator';
 
 const loadSampleButton = document.querySelector('.editor__actions--sample');
 const translateJsonButton = document.querySelector('.editor__actions--translate');
-
-let language = 'en';
+const languageInput =  document.querySelector('.form__input--language');
+const setLanguageButton = document.querySelector('.editor__actions--set-language');
 
 const EDITOR_PANELS = {
     JSON_PANEL: document.querySelector('.editor__input--json'),
@@ -30,22 +30,27 @@ const getJsonPanelContent = () => {
 
 
 const translateJson = () => {
-    const {elements, translations} = nodeTranslator(getJsonPanelContent(), language);
+    const {elements, translations} = nodeTranslator(getJsonPanelContent(), getLanguage());
 
     setJsonPanelContent(elements);
 
     setTranslationPanelContent(translations);
 
-    setPreviewPanelContent(translationParser(elements, translations, language));
+    setPreviewPanelContent(translationParser(elements, translations, getLanguage()));
 };
 
 loadSampleButton.onclick = loadExampleData;
 translateJsonButton.onclick = translateJson;
+setLanguageButton.onclick = () => {
+    const translations = getTranslationPanelContent();
+
+    setPreviewPanelContent(translationParser(getJsonPanelContent(), translations, getLanguage()));
+};
 
 EDITOR_PANELS.TRANSLATION_PANEL.oninput = () => {
     const translations = getTranslationPanelContent();
 
-    setPreviewPanelContent(translationParser(getJsonPanelContent(), translations, language));
+    setPreviewPanelContent(translationParser(getJsonPanelContent(), translations, getLanguage()));
 
 };
 
@@ -53,9 +58,12 @@ EDITOR_PANELS.JSON_PANEL.oninput = () => {
     const translations = getTranslationPanelContent();
     const elements = getJsonPanelContent();
 
-    setPreviewPanelContent(translationParser(elements, translations, language));
+    setPreviewPanelContent(translationParser(elements, translations, getLanguage()));
 };
 
+const getLanguage = () => {
+    return languageInput.value;
+};
 
 const setJsonPanelContent = json => {
     EDITOR_PANELS.JSON_PANEL.value =  JSON.stringify(json, null, 2);
