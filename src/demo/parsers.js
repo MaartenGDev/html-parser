@@ -1,7 +1,8 @@
-import htmlParser from './htmlParser';
-import jsonParser from './jsonParser';
+import htmlParser from '../htmlParser';
+import jsonParser from '../jsonParser';
 
 const loadSampleButton = document.querySelector('.editor__actions--sample');
+const translateJsonButton = document.querySelector('.editor__actions--sample')
 
 const EDITOR_PANELS = {
     JSON_PANEL: document.querySelector('.editor__input--json'),
@@ -53,6 +54,7 @@ const loadExampleData = () => {
 };
 
 loadSampleButton.onclick = loadExampleData;
+
 
 
 const getHtmlPanelContent = () => {

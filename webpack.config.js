@@ -2,10 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: ['./src/index.js'],
+    entry: {
+        '/js/parsers.js' : './src/demo/parsers.js',
+        '/js/translation.js' : './src/demo/translation.js'
+    },
     output: {
-        path: __dirname + '/public/js/',
-        filename: 'app.js',
+        path: __dirname + '/public/',
+        filename: '[name]',
     },
     devtool: 'eval-source-map',
     module: {
