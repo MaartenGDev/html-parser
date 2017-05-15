@@ -1,28 +1,3 @@
-let json = [
-    {
-        type: 'div',
-        value: 'Hello World',
-        attributes: {
-            hello: 'world',
-            src: 'test'
-        },
-        children: [
-            {
-                type: 'h1',
-                value: 'test'
-            },
-            {
-                type: 'p',
-                value: 'hello world',
-                children: [{
-                    type: 'h1',
-                    value: 'hello'
-                }]
-            }
-        ]
-    }
-];
-
 const jsonParser = (elements) => {
     return elements.map(e => {
         const isContainer = e.hasOwnProperty('children');

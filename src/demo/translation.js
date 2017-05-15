@@ -1,4 +1,5 @@
-import { nodeTranslator, translationParser } from '../nodeTranslator';
+import nodeTranslator from '../nodeTranslator';
+import translationParser from '../translationParser';
 
 const loadSampleButton = document.querySelector('.editor__actions--sample');
 const translateJsonButton = document.querySelector('.editor__actions--translate');

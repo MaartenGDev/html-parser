@@ -13,46 +13,31 @@ const getTranslationId = (value, language) => {
         return translationIndex;
     }
 
-
     translations[language][nextKey] = value;
 
-    return nextKey;
+    return {translationId: nextKey, translations};
 };
 
 const replaceNodeValueWithTranslation = (elements, language) => {
     return elements.map(e => {
         const isContainer = e.hasOwnProperty('children');
 
-        e.value = getTranslationId(e.value, language);
+        const {translationId, translations} = getTranslationId(e.value, language);
+
+        e.value = translationId;
 
         if(isContainer){
-            e.children = replaceNodeValueWithTranslation(e.children, language);
+            e.children = replaceNodeValueWithTranslation(e.children, language, translations);
         }
 
         return e;
     });
 };
 
-export const nodeTranslator = (elements, language) => {
-    elements = replaceNodeValueWithTranslation(elements, language);
-
+export default (elements, language) => {
     return {
-        elements,
+        elements: replaceNodeValueWithTranslation(elements, language),
         translations
     };
-};
-
-export const translationParser = (elements, translations, language) => {
-    return elements.map(e => {
-        const isContainer = e.hasOwnProperty('children');
-
-        e.value = translations[language][e.value];
-
-        if(isContainer){
-            e.children = translationParser(e.children, translations, language);
-        }
-
-        return e;
-    });
 };
 
