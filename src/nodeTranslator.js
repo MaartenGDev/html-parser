@@ -1,28 +1,28 @@
-let translations = {};
+let translationsStorage = {};
 
-const getTranslationId = (value, language) => {
-    if(!translations.hasOwnProperty(language)){
-        translations[language] = {};
+const getTranslation = (value, language) => {
+    if(!translationsStorage.hasOwnProperty(language)){
+        translationsStorage[language] = {};
     }
-    const translationIndex = Object.keys(translations[language]).find(x => translations[language][x] === value);
+    const translationIndex = Object.keys(translations[language]).find(x => translationsStorage[language][x] === value);
 
     const hasTranslation = translationIndex !== undefined;
-    const nextKey = Object.keys(translations[language]).length;
+    const nextKey = Object.keys(translationsStorage[language]).length;
 
     if(hasTranslation){
         return translationIndex;
     }
 
-    translations[language][nextKey] = value;
+    translationsStorage[language][nextKey] = value;
 
-    return {translationId: nextKey, translations};
+    return {translationId: nextKey, translations: translationsStorage};
 };
 
 const replaceNodeValueWithTranslation = (elements, language) => {
     return elements.map(e => {
         const isContainer = e.hasOwnProperty('children');
 
-        const {translationId, translations} = getTranslationId(e.value, language);
+        const {translationId, translations} = getTranslation(e.value, language);
 
         e.value = translationId;
 
