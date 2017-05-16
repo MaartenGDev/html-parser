@@ -56,7 +56,7 @@ test('spacing in node value gets removed', () => {
     }]);
 });
 
-test('spacing in node value gets removed', () => {
+test('spacing in parent node value gets removed', () => {
     const rootElement = parser
         .parseFromString(`<main class="app"><nav>hello <h1 class="brand">My Brand</h1></nav></main>`, "text/html")
         .querySelector('.app');
@@ -72,6 +72,34 @@ test('spacing in node value gets removed', () => {
                 attributes: {
                     class: "brand"
                 }
+            }
+        ]
+    }]);
+});
+
+test('all text in parent node gets saved into value property', () => {
+    const rootElement = parser
+        .parseFromString(`<main class="app"><nav>hello <ul id="myList"><li>First Item</li></ul> world</nav></main>`, 'text/html')
+        .querySelector('.app');
+
+    expect(htmlParser(rootElement.children)).toEqual([{
+        type: 'nav',
+        value: 'helloworld',
+        attributes: {},
+        children: [
+            {
+                type: 'ul',
+                value: '',
+                attributes: {
+                    id: 'myList'
+                },
+                children: [
+                    {
+                        type: 'li',
+                        value: 'First Item',
+                        attributes: {}
+                    }
+                ]
             }
         ]
     }]);
