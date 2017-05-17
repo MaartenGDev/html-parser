@@ -133,3 +133,29 @@ test('header with links is serialized correctly', () => {
         }]
     }]);
 });
+
+test('element with null in innerHTML should default to empty string', () => {
+    const rootElement = parser
+        .parseFromString(`<main class="app"><h1></h1></main>`, "text/html")
+        .querySelector('.app');
+
+    rootElement.querySelector('h1').innerHTML = null;
+
+    expect(htmlParser(rootElement.children)).toEqual([{
+        type: 'h1',
+        value: '',
+        attributes: {}
+    }]);
+});
+
+test('spacing in element value with spacing gets removed', () => {
+    const rootElement = parser
+        .parseFromString(`<main class="app"><h1>My Spacing </h1></main>`, "text/html")
+        .querySelector('.app');
+
+    expect(htmlParser(rootElement.children)).toEqual([{
+        type: 'h1',
+        value: 'My Spacing',
+        attributes: {}
+    }])
+});

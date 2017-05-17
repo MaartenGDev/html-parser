@@ -13,7 +13,7 @@ const jsonParser = (elements) => {
     }).join('');
 };
 
-const htmlElement = (type, content, attributes = []) => {
+const htmlElement = (type, content, attributes) => {
     const htmlAttributes = Object.keys(attributes)
         .map(key => ` ${key}="${attributes[key]}"`)
         .join('');

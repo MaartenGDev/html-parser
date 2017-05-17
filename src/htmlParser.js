@@ -1,4 +1,4 @@
-const getNodeValue = x => x !== null ? x.trim() : '';
+const getNodeValue = x => x.trim();
 
 const getTextOfTextNodes = nodes => {
     return nodes
