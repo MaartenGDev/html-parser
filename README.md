@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/MaartenGDev/html-parser.svg?branch=master)](https://travis-ci.org/MaartenGDev/html-parser)
+[![Coverage Status](https://coveralls.io/repos/github/MaartenGDev/html-parser/badge.svg?branch=master)](https://coveralls.io/github/MaartenGDev/html-parser?branch=master)
+
 # Html Parser
 A tool to convert `html` to `JSON` and `JSON` to `html`.
 
