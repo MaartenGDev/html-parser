@@ -10,7 +10,7 @@ const getTranslation = (value, language) => {
     const nextKey = Object.keys(translationsStorage[language]).length;
 
     if(hasTranslation){
-        return translationIndex;
+        return {translationId: parseInt(translationIndex), translations: translationsStorage};
     }
 
     translationsStorage[language][nextKey] = value;
@@ -19,15 +19,16 @@ const getTranslation = (value, language) => {
 };
 
 const replaceNodeValueWithTranslation = (elements, language) => {
+    debugger;
     return elements.map(e => {
         const isContainer = e.hasOwnProperty('children');
 
-        const {translationId, translations} = getTranslation(e.value, language);
+        const {translationId} = getTranslation(e.value, language);
 
         e.value = translationId;
 
         if(isContainer){
-            e.children = replaceNodeValueWithTranslation(e.children, language, translations);
+            e.children = replaceNodeValueWithTranslation(e.children, language);
         }
 
         return e;
