@@ -4,7 +4,7 @@ const getTranslation = (value, language) => {
     if(!translationsStorage.hasOwnProperty(language)){
         translationsStorage[language] = {};
     }
-    const translationIndex = Object.keys(translations[language]).find(x => translationsStorage[language][x] === value);
+    const translationIndex = Object.keys(translationsStorage[language]).find(x => translationsStorage[language][x] === value);
 
     const hasTranslation = translationIndex !== undefined;
     const nextKey = Object.keys(translationsStorage[language]).length;
@@ -37,7 +37,7 @@ const replaceNodeValueWithTranslation = (elements, language) => {
 export default (elements, language) => {
     return {
         elements: replaceNodeValueWithTranslation(elements, language),
-        translations
+        translations: translationsStorage
     };
 };
 
