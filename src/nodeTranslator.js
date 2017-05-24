@@ -1,44 +1,45 @@
-let translationsStorage = {};
+const getTranslation = (value, language, translations) => {
+  if (!translations.hasOwnProperty(language)) {
+    translations[language] = {}
+  }
+  const translationIndex = Object.keys(translations[language]).find(x => translations[language][x] === value)
 
-const getTranslation = (value, language) => {
-    if(!translationsStorage.hasOwnProperty(language)){
-        translationsStorage[language] = {};
+  const hasTranslation = translationIndex !== undefined
+  const nextKey = Object.keys(translations[language]).length
+
+  if (hasTranslation) {
+    return {translationId: parseInt(translationIndex), translations: translations}
+  }
+
+  translations[language][nextKey] = value
+
+  return {translationId: nextKey, translations: translations}
+}
+
+const replaceNodeValueWithTranslation = (elements, language, translations) => {
+  debugger;
+
+  return elements.map(e => {
+    const isContainer = e.hasOwnProperty('children')
+
+    const {translationId} = getTranslation(e.value, language, translations)
+
+    e.value = translationId
+
+    if (isContainer) {
+      e.children = replaceNodeValueWithTranslation(e.children, language, translations)
     }
-    const translationIndex = Object.keys(translationsStorage[language]).find(x => translationsStorage[language][x] === value);
 
-    const hasTranslation = translationIndex !== undefined;
-    const nextKey = Object.keys(translationsStorage[language]).length;
-
-    if(hasTranslation){
-        return {translationId: parseInt(translationIndex), translations: translationsStorage};
-    }
-
-    translationsStorage[language][nextKey] = value;
-
-    return {translationId: nextKey, translations: translationsStorage};
-};
-
-const replaceNodeValueWithTranslation = (elements, language) => {
-    debugger;
-    return elements.map(e => {
-        const isContainer = e.hasOwnProperty('children');
-
-        const {translationId} = getTranslation(e.value, language);
-
-        e.value = translationId;
-
-        if(isContainer){
-            e.children = replaceNodeValueWithTranslation(e.children, language);
-        }
-
-        return e;
-    });
-};
+    return e
+  })
+}
 
 export default (elements, language) => {
-    return {
-        elements: replaceNodeValueWithTranslation(elements, language),
-        translations: translationsStorage
-    };
-};
+  const translations = {}
+
+  return {
+    elements: replaceNodeValueWithTranslation(elements, language, translations),
+    translations: translations
+  }
+}
 
