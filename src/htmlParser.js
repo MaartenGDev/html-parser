@@ -1,4 +1,5 @@
 // @flow
+import type {JsonNode} from './types/JsonNode';
 
 const getNodeValue = x => x.trim()
 
@@ -19,7 +20,7 @@ const getAttributes = node => {
   }, {})
 }
 
-const htmlParser = (nodes: Array<Object>) => {
+const htmlParser = (nodes: Array<Object>) : Array<JsonNode> => {
   return [...nodes].map(node => {
     const isContainer = node.children.length
 
@@ -35,7 +36,8 @@ const htmlParser = (nodes: Array<Object>) => {
     return {
       type: node.localName,
       value: getNodeValue(node.innerHTML),
-      attributes: getAttributes(node)
+      attributes: getAttributes(node),
+      children: []
     }
   })
 }
