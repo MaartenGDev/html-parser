@@ -1,15 +1,15 @@
 const translationParser = (elements, translations, language) => {
-    return elements.map(e => {
-        const isContainer = e.hasOwnProperty('children');
+  return elements.map(e => {
+    const isContainer = e.hasOwnProperty('children')
 
-        e.value = translations[language][e.value];
+    e.value = translations[language][e.value]
 
-        if(isContainer){
-            e.children = translationParser(e.children, translations, language);
-        }
+    if (isContainer) {
+      e.children = translationParser(e.children, translations, language)
+    }
 
-        return e;
-    });
-};
+    return e
+  })
+}
 
-export default translationParser;
+export default translationParser

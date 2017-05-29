@@ -13,7 +13,7 @@ const getTranslation = (value, language, translations) => {
 
   translations[language][nextKey] = value
 
-  return nextKey;
+  return nextKey
 }
 
 const replaceNodeValueWithTranslation = (elements, language, translations) => {
