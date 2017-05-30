@@ -3,14 +3,14 @@ import type {JsonNode} from './types/JsonNode';
 
 const getNodeValue = x => x.trim()
 
-const getTextOfTextNodes = nodes => {
+const getTextOfTextNodes = (nodes: Array<Object>) => {
   return nodes
     .filter(x => x.nodeType === Node.TEXT_NODE)
     .map(x => x.data.trim())
     .join('')
 }
 
-const getAttributes = node => {
+const getAttributes = (node: JsonNode) => {
   return Object.keys(node.attributes).reduce((attributes, currentAttributeKey) => {
     const attribute = node.attributes[currentAttributeKey]
 
@@ -22,7 +22,7 @@ const getAttributes = node => {
 
 const htmlParser = (nodes: Array<Object>) : Array<JsonNode> => {
   return [...nodes].map(node => {
-    const isContainer = node.children.length
+    const isContainer = node.children.length > 0
 
     if (isContainer) {
       return {
