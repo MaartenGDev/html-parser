@@ -1,6 +1,9 @@
-const jsonParser = (elements) => {
+// @flow
+import type {JsonNode} from './types/JsonNode';
+
+const jsonParser = (elements: Array<JsonNode>) => {
   return elements.map(e => {
-    const isContainer = e.hasOwnProperty('children')
+    const isContainer = e.hasOwnProperty('children') && e.children.length > 0
     const {type, value = '', attributes = {}} = e
 
     if (isContainer) {

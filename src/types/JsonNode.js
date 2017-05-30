@@ -2,7 +2,7 @@
 
 export type JsonNode = {
   type: string,
-  value: string,
+  value: string | number,
   attributes: Object,
   children: Array<JsonNode>
 }

@@ -1,4 +1,8 @@
-const getTranslation = (value, language, translations) => {
+// @flow
+
+import type {JsonNode} from './types/JsonNode';
+
+const getTranslation = (value, language: string, translations: Object) => {
   if (!translations.hasOwnProperty(language)) {
     translations[language] = {}
   }
@@ -16,7 +20,7 @@ const getTranslation = (value, language, translations) => {
   return nextKey
 }
 
-const replaceNodeValueWithTranslation = (elements, language, translations) => {
+const replaceNodeValueWithTranslation = (elements: Array<JsonNode>, language: string, translations: Object) => {
   return elements.map(e => {
     const isContainer = e.hasOwnProperty('children')
 
@@ -30,7 +34,7 @@ const replaceNodeValueWithTranslation = (elements, language, translations) => {
   })
 }
 
-export default (elements, language) => {
+export default (elements: Array<JsonNode>, language: string) => {
   const translations = {}
 
   return {
