@@ -4,7 +4,7 @@ pipeline {
     agent { docker 'node:6-alpine' }
 
     environment {
-        PROD_USER = credentials('PROD_USER')
+        PROD_USER = credentials('PROD_USER'),
         PROD_HOST_IP = credentials('PROD_HOST_IP'),
         PROD_SSH_KEY_PATH = credentials('PROD_SSH_KEY_PATH'),
         RELEASE_DOMAIN = 'parser.maartendev.me'
