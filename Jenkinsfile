@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                 sh "ssh -o StrictHostKeyChecking=no ${PROD_USER}@${PROD_HOST_IP} -i ${PROD_SSH_KEY_PATH} 'rm -rf /var/www/${RELEASE_DOMAIN}/*'"
-                sh "scp -o StrictHostKeyChecking=no -r -i ${PROD_SSH_KEY_PATH} ${WORKSPACE} ${PROD_USER}@${PROD_HOST_IP}:/var/www/${RELEASE_DOMAIN}/"
+                sh "scp -o StrictHostKeyChecking=no -r -i ${PROD_SSH_KEY_PATH} ${WORKSPACE}* ${PROD_USER}@${PROD_HOST_IP}:/var/www/${RELEASE_DOMAIN}/"
             }
         }
     }
