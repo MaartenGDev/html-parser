@@ -19,7 +19,6 @@ pipeline {
         stage('Unit Tests'){
             steps {
                 sh './node_modules/jest/bin/jest.js --coverage'
-                junit 'coverage/clover.xml'
             }
         }
 
