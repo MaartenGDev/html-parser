@@ -1,7 +1,7 @@
 
 
 pipeline {
-    agent { docker 'node:6-alpine' }
+    agent { docker 'node:latest' }
 
     environment {
         PROD_USER = credentials('PROD_USER')
@@ -13,7 +13,7 @@ pipeline {
     stages {
        stage('Setup'){
             steps {
-                sh 'npm install'
+                sh 'ls -la'
             }
         }
         stage('Unit Tests'){
