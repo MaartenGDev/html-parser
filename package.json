@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
-    "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "jest --coverage",
+    "test:report": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "coverage": "node_modules/flow-coverage-report/bin/flow-coverage-report.js -i 'src/**/*.js' -x 'src/demo/*.js' -t html -t json -t text"
   },
   "repository": {
