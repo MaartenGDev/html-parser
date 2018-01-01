@@ -15,6 +15,7 @@ pipeline {
             steps {
                 sh 'ls -la'
                 sh 'npm -v'
+                sh 'npm install'
             }
         }
         stage('Unit Tests'){
