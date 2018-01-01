@@ -1,6 +1,6 @@
 {
   "name": "html-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A parser that converts html to JSON and JSON to html",
   "main": "index.js",
   "scripts": {
