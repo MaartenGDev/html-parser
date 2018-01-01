@@ -14,6 +14,7 @@ pipeline {
        stage('Setup'){
             steps {
                 sh 'ls -la'
+                sh 'npm -v'
             }
         }
         stage('Unit Tests'){
