@@ -11,6 +11,11 @@ pipeline {
     }
 
     stages {
+       stage('Setup'){
+            steps {
+                sh 'npm install'
+            }
+        }
         stage('Unit Tests'){
             steps {
                 sh './node_modules/jest/bin/jest.js --coverage'
