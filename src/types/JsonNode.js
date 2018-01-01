@@ -5,4 +5,4 @@ export type JsonNode = {
   value: string | number,
   attributes: Object,
   children: Array<JsonNode>
-}
+};

@@ -1,19 +1,23 @@
 // @flow
 
-import type { JsonNode } from './types/JsonNode'
+import type { JsonNode } from "./types/JsonNode";
 
-const translationParser = (elements : Array<JsonNode>, translations : Object, language: string) : Array<JsonNode> => {
+const translationParser = (
+  elements: Array<JsonNode>,
+  translations: Object,
+  language: string
+): Array<JsonNode> => {
   return elements.map(e => {
-    const isContainer = e.hasOwnProperty('children') && e.children.length > 0
+    const isContainer = e.hasOwnProperty("children") && e.children.length > 0;
 
-    e.value = translations[language][e.value]
+    e.value = translations[language][e.value];
 
     if (isContainer) {
-      e.children = translationParser(e.children, translations, language)
+      e.children = translationParser(e.children, translations, language);
     }
 
-    return e
-  })
-}
+    return e;
+  });
+};
 
-export default translationParser
+export default translationParser;

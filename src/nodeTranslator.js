@@ -1,45 +1,54 @@
 // @flow
 
-import type {JsonNode} from './types/JsonNode';
+import type { JsonNode } from "./types/JsonNode";
 
 const getTranslation = (value, language: string, translations: Object) => {
   if (!translations.hasOwnProperty(language)) {
-    translations[language] = {}
+    translations[language] = {};
   }
-  const translationIndex = Object.keys(translations[language]).find(x => translations[language][x] === value)
+  const translationIndex = Object.keys(translations[language]).find(
+    x => translations[language][x] === value
+  );
 
-  const hasTranslation = translationIndex !== undefined
-  const nextKey = Object.keys(translations[language]).length
+  const hasTranslation = translationIndex !== undefined;
+  const nextKey = Object.keys(translations[language]).length;
 
   if (hasTranslation) {
-    return parseInt(translationIndex)
+    return parseInt(translationIndex);
   }
 
-  translations[language][nextKey] = value
+  translations[language][nextKey] = value;
 
-  return nextKey
-}
+  return nextKey;
+};
 
-const replaceNodeValueWithTranslation = (elements: Array<JsonNode>, language: string, translations: Object) => {
+const replaceNodeValueWithTranslation = (
+  elements: Array<JsonNode>,
+  language: string,
+  translations: Object
+) => {
   return elements.map(e => {
-    const isContainer = e.hasOwnProperty('children')
+    const isContainer = e.hasOwnProperty("children");
 
-    e.value = getTranslation(e.value, language, translations)
+    e.value = getTranslation(e.value, language, translations);
 
     if (isContainer) {
-      e.children = replaceNodeValueWithTranslation(e.children, language, translations)
+      e.children = replaceNodeValueWithTranslation(
+        e.children,
+        language,
+        translations
+      );
     }
 
-    return e
-  })
-}
+    return e;
+  });
+};
 
 export default (elements: Array<JsonNode>, language: string) => {
-  const translations = {}
+  const translations = {};
 
   return {
     elements: replaceNodeValueWithTranslation(elements, language, translations),
     translations: translations
-  }
-}
-
+  };
+};
