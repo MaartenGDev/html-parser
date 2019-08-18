@@ -4,6 +4,9 @@
 # Html Parser
 A tool to convert `html` to `JSON` and `JSON` to `html`.
 
+## Demo
+[Try it online](https://parser.maartendev.me/)
+
 ## Convert JSON to html
 
 ```js
