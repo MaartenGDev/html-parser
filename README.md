@@ -5,7 +5,8 @@
 A tool to convert `html` to `JSON` and `JSON` to `html`.
 
 ## Demo
-[Try it online](https://parser.maartendev.me/)
+- [Try json-to-html feature online](https://maartengdev.github.io/html-parser/)
+- [Try translation feature online](https://maartengdev.github.io/html-parser/translation.html)
 
 ## Convert JSON to html
 
